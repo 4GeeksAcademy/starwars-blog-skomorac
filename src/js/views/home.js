@@ -1,21 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import MainCard from "../component/mainCard";
 
 export const Home = () => {
-  const { actions, store } = useContext(Context);
-
-  useEffect(() => {
-    actions.getPeople();
-  }, [actions]);
+  const { store } = useContext(Context);
 
   return (
     <div className="text-center mt-5">
-      <h2>Characters:</h2>
-      <ul>
-        {store.people.map((person) => (
-          <li key={person.uid}>{person.name}</li>
-        ))}
-      </ul>
+      <MainCard data={store.people} imageUrlKey="characters" nameKey="name" />
     </div>
   );
 };
