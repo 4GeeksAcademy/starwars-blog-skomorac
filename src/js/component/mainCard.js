@@ -3,7 +3,6 @@ import { Card, Container } from "react-bootstrap";
 import "../../styles/index.css";
 
 const MainCard = ({ data, imageUrlKey, nameKey }) => {
-  console.log(data);
   return (
     <Container fluid>
       <h1 className="mainTitle mb-3">{imageUrlKey}</h1>
