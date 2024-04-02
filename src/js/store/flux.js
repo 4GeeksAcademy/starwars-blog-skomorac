@@ -2,9 +2,14 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       people: [],
+      peopleProperties: [],
       vehicles: [],
+      vehicleProperties: [],
       planets: [],
+      planetProperties: [],
+      favorites: [],
     },
+
     actions: {
       loadLocalData: () => {
         // Check if data exists in localStorage
@@ -32,6 +37,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      getPeopleProperties: (uid) => {
+        fetch(`https://www.swapi.tech/api/people/${uid}`, {
+          method: "GET",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setStore({ peopleProperties: data.result });
+            localStorage.setItem("starWarsData", JSON.stringify(getStore()));
+          })
+          .catch((err) => console.error(err));
+      },
+
       getVehicles: async () => {
         try {
           const response = await fetch("https://www.swapi.tech/api/vehicles");
@@ -44,6 +61,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      getVehicleProperties: (uid) => {
+        fetch(`https://www.swapi.tech/api/vehicles/${uid}`, {
+          method: "GET",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setStore({ vehicleProperties: data.result });
+            localStorage.setItem("starWarsData", JSON.stringify(getStore()));
+          })
+          .catch((err) => console.error(err));
+      },
+
       getPlanets: async () => {
         try {
           const response = await fetch("https://www.swapi.tech/api/planets");
@@ -54,6 +83,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.error("Error fetching planets: -->", error);
         }
+      },
+
+      getPlanetProperties: (uid) => {
+        fetch(`https://www.swapi.tech/api/planets/${uid}`, {
+          method: "GET",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setStore({ planetProperties: data.result });
+            localStorage.setItem("starWarsData", JSON.stringify(getStore()));
+          })
+          .catch((err) => console.error(err));
       },
     },
   };
