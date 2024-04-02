@@ -1,27 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      demo: [
-        {
-          title: "FIRST",
-          background: "white",
-          initial: "white",
-        },
-        {
-          title: "SECOND",
-          background: "white",
-          initial: "white",
-        },
-      ],
       people: [],
       vehicles: [],
       planets: [],
     },
     actions: {
-      exampleFunction: () => {
-        getActions().changeColor(0, "green");
-      },
-
       loadLocalData: () => {
         // Check if data exists in localStorage
         const storedData = localStorage.getItem("starWarsData");
@@ -34,15 +18,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           getActions().getVehicles();
           getActions().getPlanets();
         }
-      },
-
-      changeColor: (index, color) => {
-        const store = getStore();
-        const demo = store.demo.map((elm, i) => {
-          if (i === index) elm.background = color;
-          return elm;
-        });
-        setStore({ demo: demo });
       },
 
       getPeople: async () => {
